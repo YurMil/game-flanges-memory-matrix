@@ -13,6 +13,7 @@ This repository currently contains the product and engineering documentation pac
 - **Testing:** Vitest + Playwright
 - **Deployment:** static assets hosted independently and embedded into `cadautoscript.com`
 - **Primary integration:** route-mounted microfrontend or sandboxed iframe with a typed `postMessage` contract
+- **Optional shared leaderboard:** compact Supabase table accessed by the authenticated host site
 
 Phaser is retained because the prototype already uses it effectively, the game is 2D and interaction-heavy, procedural graphics eliminate the need for a large asset pipeline, and Phaser provides mature input, scaling, timing, scene, animation, camera, and audio systems without the overhead of a 3D engine.
 
@@ -27,6 +28,7 @@ Phaser is retained because the prototype already uses it effectively, the game i
 - [Accessibility, localization, and UX](docs/07-accessibility-localization-ux.md)
 - [Deployment and operations](docs/08-deployment-operations.md)
 - [Security and privacy](docs/09-security-privacy.md)
+- [Compact Supabase leaderboard](docs/10-supabase-leaderboard.md)
 - [Decision records](docs/adr/README.md)
 
 ## Prototype source
@@ -95,7 +97,10 @@ The first production release should include:
 - English, Estonian, and Russian localization;
 - integration events for the host platform;
 - automated unit and end-to-end tests;
-- static deployment with immutable assets and rollback support.
+- static deployment with immutable assets and rollback support;
+- an optional authenticated Top-10 leaderboard using one best-result row per user and mode.
+
+The leaderboard remains non-blocking: guests and users experiencing a backend error can always play locally.
 
 ## License
 
