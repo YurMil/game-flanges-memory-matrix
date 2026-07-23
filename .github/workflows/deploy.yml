@@ -21,13 +21,12 @@ jobs:
           node-version: '20'
           cache: npm
 
-      # 3. Устанавливаем зависимости и собираем
+      # 3. Устанавливаем зависимости и собираем под iframe сайта
       - name: Install and Build
         run: |
           npm ci
-          npm run build
-          mv dist/index.html dist/app.html
-        # Теперь у нас есть папка dist с готовой игрой (entry = app.html для iframe сайта)
+          npm run build:host
+        # dist/app.html + dist/assets/* → static/mini-games/flanges-memory-matrix/
 
       # 4. Отправляем папку dist в репозиторий сайта
       - name: Push to Website Repository
