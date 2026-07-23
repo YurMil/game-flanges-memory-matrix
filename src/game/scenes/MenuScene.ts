@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { MODES, type GameModeId } from '../../domain/types';
 import { loadPersistence, savePersistence } from '../../app/persistence';
+import { isEmbeddedInHost, isHostStaticEntry } from '../../app/embed';
 import {
   getAdaptiveLayout,
   type LayoutTokens,
@@ -190,8 +191,12 @@ export class MenuScene extends Phaser.Scene {
 
     this.tips.setText(
       isCompact
-        ? 'Tap flanges  ·  P pause  ·  F fullscreen'
-        : 'Click / tap flanges  ·  Arrows + Enter  ·  P pause  ·  F fullscreen',
+        ? isEmbeddedInHost() || isHostStaticEntry()
+          ? 'Tap flanges  ·  P pause'
+          : 'Tap flanges  ·  P pause  ·  F fullscreen'
+        : isEmbeddedInHost() || isHostStaticEntry()
+          ? 'Click / tap flanges  ·  Arrows + Enter  ·  P pause'
+          : 'Click / tap flanges  ·  Arrows + Enter  ·  P pause  ·  F fullscreen',
     );
     this.tips.setStyle({
       fontFamily: THEME.fontMono,

@@ -18,15 +18,19 @@ Playable prototype is running (`npm run dev` → http://localhost:5173).
 - Metallic flange redraw (brushed rings, hex bolts, bevels, shadows)
 - Floating `FocusCursor` follows pointer/touch with magnet-to-flange; keyboard moves between cells
 - **Performance pass** (pulse via scale, dirty gauge/cursor, vessel shimmer layer, layout debounce)
-- **Deploy workflow** (mirror PVT): push `main` → build → rename `app.html` → publish to `cadautoscript.com/static/mini-games/flanges-memory-matrix`
+- **Deploy workflow** + host embed hardening for `cadautoscript.com` CSP/iframe:
+  - no Google Fonts CDN; system font stacks
+  - fill iframe box (not outer 100dvh)
+  - disable nested `F` fullscreen when embedded
+  - `npm run build:host` → `app.html` for MiniGameShellPage
 
 ## TODOs / next agent
 
 - [ ] Ensure GitHub secret `DEPLOY_TOKEN` exists on this repo (PAT write to `YurMil/cadautoscript.com`)
 - [ ] Merge to `main` to trigger first production publish (replaces placeholder `app.html` on the site)
+- [ ] Optional: self-host Orbitron/ShareTechMono woff2 under `public/fonts` if brand typography is required under CSP
 - [ ] AudioManager + mute
 - [ ] Tutorial scene
 - [ ] i18n en/et/ru
-- [ ] On phone, optionally cap grid columns (GDD) via difficulty + layout.shortSide
-- [ ] Unit tests for `classifyBreakpoint` / `createLayoutTokens`
-- [ ] Platform bridge `postMessage` (docs/04) — host already uses same-origin iframe
+- [ ] Unit tests for layout + domain
+- [ ] Platform bridge `postMessage` only if host MiniGameShellPage gains a listener

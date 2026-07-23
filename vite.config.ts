@@ -8,6 +8,10 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
-    sourcemap: true,
+    // Keep deploy artifact small for cadautoscript.com static push (no .map in mini-games/)
+    sourcemap: false,
+    assetsDir: 'assets',
+    outDir: 'dist',
+    chunkSizeWarningLimit: 1600,
   },
 });

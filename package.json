@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run typecheck && vite build",
+    "build:host": "npm run build && node ./scripts/prepare-host-dist.mjs",
     "preview": "vite preview",
+    "preview:host": "npm run build:host && vite preview --outDir dist",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

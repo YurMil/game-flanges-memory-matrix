@@ -39,10 +39,18 @@ On every push to `main`, GitHub Actions builds the game and publishes it into th
 
 `YurMil/cadautoscript.com` → `static/mini-games/flanges-memory-matrix/`
 
-Host page (already wired):
+Host page (already wired in the site repo):
 
 - Arcade: `/mini-games/flanges-memory-matrix/`
-- Iframe entry: `/mini-games/flanges-memory-matrix/app.html`
+- Iframe entry: `/mini-games/flanges-memory-matrix/app.html` (`MiniGameShellPage` → `.tool-frame`)
+
+### Host compatibility notes
+
+- Vite `base: './'` so assets resolve under the mini-game subdirectory
+- Entry renamed to `app.html` (site contract)
+- No Google Fonts / CDN scripts — cadautoscript.com CSP allows `font-src 'self' data:` and `style-src 'self' 'unsafe-inline'` only
+- When embedded in the site iframe, browser fullscreen (`F`) is disabled; the site shell owns fullscreen
+- Phaser is fully bundled (no import maps / esm.sh)
 
 ### Required secret
 
@@ -54,15 +62,12 @@ In this repository settings → Secrets → Actions, add:
 
 Same pattern as PVT (`pressure-vessel-tycoon`).
 
-### Local production build
+### Local production / host-parity build
 
 ```bash
-npm run build
-# optionally rename for host iframe parity:
-mv dist/index.html dist/app.html
+npm run build:host   # typecheck + vite build + rename to app.html
+npx vite preview --outDir dist
 ```
-
-`vite.config.ts` uses `base: './'` so assets resolve under the site subdirectory.
 
 ## Documentation
 
