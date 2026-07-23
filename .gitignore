@@ -1,6 +1,7 @@
 node_modules/
 dist/
 output/
+*.tsbuildinfo
 .DS_Store
 *.local
 .vscode/
