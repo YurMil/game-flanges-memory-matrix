@@ -23,8 +23,9 @@ export const THEME = {
   text: '#d7e2ee',
   textDim: '#8fa0b3',
   textAmber: '#f5c518',
-  fontDisplay: 'Orbitron, sans-serif',
-  fontMono: 'Share Tech Mono, monospace',
+  // CSP-safe on cadautoscript.com (font-src 'self' data: — no Google Fonts)
+  fontDisplay: "Segoe UI, Helvetica Neue, Arial, sans-serif",
+  fontMono: "Consolas, Cascadia Mono, Lucida Console, ui-monospace, monospace",
 } as const;
 
 export type GameTheme = typeof THEME;
